@@ -1,0 +1,33 @@
+name: axie_tracker
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  get: 4.3.8
+  flutter:
+    sdk: flutter
+  firebase_core: ^1.5.0
+  cloud_firestore: ^2.5.0
+  firebase_auth: ^3.0.2
+  google_fonts: ^2.1.0
+  intl: ^0.17.0
+  flutter_form_builder: ^6.0.1
+  font_awesome_flutter: ^9.1.0
+  shared_preferences: ^2.0.6
+  focused_menu: ^1.0.5
+  sliding_up_panel: ^2.0.0+1
+  timeago: ^3.1.0
+  liquid_pull_to_refresh: ^3.0.0
+  flutter_zoom_drawer: ^2.1.1
+
+dev_dependencies:
+  lints: 1.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

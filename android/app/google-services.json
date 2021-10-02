@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "582500311244",
+    "project_id": "axie-tracker-11394",
+    "storage_bucket": "axie-tracker-11394.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582500311244:android:a40f149ec17cf88825a269",
+        "android_client_info": {
+          "package_name": "com.shineholder.axieTracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582500311244-rq57edacuifeiv1j0kdqbtub1t91odgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWvDRvd1FHGV5BRb1CAJEnVKT25KAVZ4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582500311244-rq57edacuifeiv1j0kdqbtub1t91odgr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "582500311244-ol2nhfkmqrhdqjlifu0u9pgde9m95p0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shineholder.axieTracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
