@@ -14,7 +14,7 @@ class CoinTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Stream.fromFuture(_controller.getCoinData(coinId)),
+      stream: _controller.streamGetCoinData(coinId),
       builder: (context, AsyncSnapshot<coin.Coin> snapshot) {
         if (snapshot.hasData) {
           final currentPrice = snapshot.data!.marketData.currentPrice['usd']!

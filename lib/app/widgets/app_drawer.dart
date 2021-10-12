@@ -1,4 +1,4 @@
-import 'package:axie_tracker/app/modules/auth/controllers/auth_controller.dart';
+import '../modules/auth/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

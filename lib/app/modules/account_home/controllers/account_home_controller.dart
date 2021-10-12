@@ -33,6 +33,7 @@ class AccountHomeController extends GetxController {
   int get totalAxie => _totalAxie.value;
   List<Result> get listAxie => _listAxie;
   Account get account => _account.value;
+  bool _running = true;
 
   final gameApi = 'https://game-api.axie.technology/api/v1/';
   // final axieWorld = 'https://axiesworld.firebaseapp.com/updateSpecific';
@@ -80,8 +81,11 @@ class AccountHomeController extends GetxController {
   }
 
   Stream<Coin> streamGetCoinData(String coinString) async* {
-    Coin coinData = await getCoinData(coinString);
-    yield coinData;
+    while (_running) {
+      await Future<void>.delayed(Duration(seconds: 10));
+      Coin coinData = await getCoinData(coinString);
+      yield coinData;
+    }
   }
 
   Future<void> getAxiesData(String address) async {

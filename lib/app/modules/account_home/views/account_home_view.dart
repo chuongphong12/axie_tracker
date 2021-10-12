@@ -16,7 +16,7 @@ class AccountHomeView extends GetView<AccountHomeController> {
   @override
   Widget build(BuildContext context) {
     final account = controller.account;
-    double _panelMinHeight = MediaQuery.of(context).size.height * 0.1;
+    double _panelMinHeight = MediaQuery.of(context).size.height * 0.118;
     double _panelMaxHeight = MediaQuery.of(context).size.height * 0.8;
 
     String _timeAgos(int timeStamp) {
@@ -53,134 +53,131 @@ class AccountHomeView extends GetView<AccountHomeController> {
       });
     }
 
-    return SafeArea(
-      top: false,
-      child: Scaffold(
-          appBar: AppBar(
-            title: Obx(() => Text(controller.name)),
-            actions: [
-              IconButton(
-                onPressed: () => _handleRefresh(),
-                icon: Icon(Icons.refresh),
-              )
-            ],
+    return Scaffold(
+        appBar: AppBar(
+          title: Obx(() => Text(controller.name)),
+          actions: [
+            IconButton(
+              onPressed: () => _handleRefresh(),
+              icon: Icon(Icons.refresh),
+            )
+          ],
+        ),
+        body: SlidingUpPanel(
+          minHeight: _panelMinHeight,
+          maxHeight: _panelMaxHeight,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+          color: Colors.blue.shade800,
+          panelBuilder: (scroll) => AxiePanel(
+            controller: scroll,
+            axieList: controller.listAxie,
+            total: controller.totalAxie,
           ),
-          body: SlidingUpPanel(
-            minHeight: _panelMinHeight,
-            maxHeight: _panelMaxHeight,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
-            color: Colors.blue.shade800,
-            panelBuilder: (scroll) => AxiePanel(
-              controller: scroll,
-              axieList: controller.listAxie,
-              total: controller.totalAxie,
-            ),
-            body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        CoinTracker('smooth-love-potion', 4),
-                        CoinTracker('axie-infinity'),
-                        CoinTracker('ethereum'),
-                      ],
-                    ),
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CoinTracker('smooth-love-potion', 4),
+                      CoinTracker('axie-infinity'),
+                      CoinTracker('ethereum'),
+                    ],
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('Total SLP'),
-                            Text('${account.totalSlp.toString()} SLP'),
-                            FutureBuilder(
-                              future: _convertUsd(account.totalSlp),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<double?> snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                        '${snapshot.data!.toStringAsFixed(2)} USD');
-                                  }
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text('Total SLP'),
+                          Text('${account.totalSlp.toString()} SLP'),
+                          FutureBuilder(
+                            future: _convertUsd(account.totalSlp),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<double?> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  return Text(
+                                      '${snapshot.data!.toStringAsFixed(2)} USD');
                                 }
-                                return Text('0 USD');
-                              },
-                            ),
-                          ],
-                        ),
+                              }
+                              return Text('0 USD');
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('Claimed SLP'),
-                            Text('${account.lifetimeSlp.toString()} SLP'),
-                            FutureBuilder(
-                              future: _convertUsd(account.lifetimeSlp),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<double?> snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                        '${snapshot.data!.toStringAsFixed(2)} USD');
-                                  }
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text('Claimed SLP'),
+                          Text('${account.lifetimeSlp.toString()} SLP'),
+                          FutureBuilder(
+                            future: _convertUsd(account.lifetimeSlp),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<double?> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  return Text(
+                                      '${snapshot.data!.toStringAsFixed(2)} USD');
                                 }
-                                return Text('0 USD');
-                              },
-                            ),
-                          ],
-                        ),
+                              }
+                              return Text('0 USD');
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text('Rank'),
-                            Text('Current rank: ${account.rank.toString()}'),
-                            Text('Elo: ${account.mmr.toString()}'),
-                          ],
-                        ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text('Rank'),
+                          Text('Current rank: ${account.rank.toString()}'),
+                          Text('Elo: ${account.mmr.toString()}'),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }
